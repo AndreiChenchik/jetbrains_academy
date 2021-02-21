@@ -2,7 +2,6 @@ import random
 
 default_choices = "rock,paper,scissors"
 
-
 user_name = input("Enter your name: ")
 print(f"Hello, {user_name}")
 
@@ -12,7 +11,9 @@ if not user_choices:
 else:
     choices = user_choices.split(",")
 
-rules = dict([(move,(choices[choices.index(move)+1:]+choices[:choices.index(move)])[:int((len(choices)-1)/2)]) for move in choices])
+rules = dict([(move, (choices[choices.index(move)+1:]
+                      + choices[:choices.index(move)]
+                      )[:int((len(choices)-1)/2)]) for move in choices])
 
 possible_game_choices = list(rules.keys())
 
@@ -21,9 +22,10 @@ print(f"Okay, let's start")
 user_choice = input()
 
 try:
-    with open("rating.txt","r") as file:
+    with open("rating.txt", "r") as file:
         data = file.readlines()
-        scores = dict([(" ".join(line.split(" ")[:-1]), int(line.split(" ")[-1])) for line in data])
+        scores = dict([(" ".join(line.split(" ")[:-1]),
+                        int(line.split(" ")[-1])) for line in data])
 except FileNotFoundError:
     scores = dict()
 
@@ -47,7 +49,7 @@ while user_choice != "!exit":
         scores[user_name] += 100
     user_choice = input()
 
-with open("rating.txt","w") as file:
+with open("rating.txt", "w") as file:
     data = "\n".join([f"{score[0]} {score[1]}" for score in scores.items()])
     file.write(data)
 
