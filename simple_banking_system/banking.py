@@ -4,7 +4,7 @@ from enum import Enum
 import sqlite3
 
 
-class Bank(object):
+class Bank:
     def __init__(self, bank_iin: int, database: sqlite3.Connection) -> None:
         self.bank_iin = bank_iin
         self.database = database
@@ -159,7 +159,7 @@ class AccountMenu(Enum):
     EXIT = 0
 
 
-class ConsoleUI(object):
+class ConsoleUI:
     def __init__(self) -> None:
         self.level: MenuLevel = MenuLevel.TOP
 
@@ -266,7 +266,7 @@ class ConsoleUI(object):
         print("Enter how much money you want to transfer:")
 
 
-class Controller(object):
+class Controller:
     def __init__(self, ui: ConsoleUI, bank: Bank) -> None:
         self.ui: ConsoleUI = ui
         self.bank: Bank = bank
@@ -366,7 +366,7 @@ class Controller(object):
         exit()
 
 
-class BankAccount(object):
+class BankAccount:
     def __init__(self, account_number: int,
                  account_bank: Bank, balance: float) -> None:
         self.account_number = account_number
